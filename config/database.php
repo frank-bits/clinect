@@ -112,6 +112,16 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'redis' => [
+        'driver' => 'redis',
+        'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
+        'queue' => env('REDIS_QUEUE', '{default}'),
+        'retry_after' => env('REDIS_QUEUE_RETRY_AFTER', 90),
+        'block_for' => null,
+        'after_commit' => false,
+        ],
+        
+
     ],
 
     /*
