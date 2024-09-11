@@ -26,15 +26,17 @@ class FetchTickets implements ShouldQueue
      */
     public function handle(): void
     {
+        // Fetch the ticket count from the API
         $response = Http::get('http://127.0.0.1:8000/api/tickets');
 
-        $tickets=$response->json();
-       
-        for($i=0; $i<$tickets['total']; $i++){ 
-            if($i>0){
+        $tickets = $response->json();
+
+        // Loop through the ticket batches and dispatch a job for each batch
+        for ($i = 0; $i < $tickets['total']; $i++) {
+            if ($i > 0) {
+                //Delay the job by 30 seconds as to not overwhelm the API
                 FetchTicketsBatch::dispatch($i)
-                ->delay(now()->addSeconds(30));
-              
+                    ->delay(now()->addSeconds(30));
             }
         }
     }

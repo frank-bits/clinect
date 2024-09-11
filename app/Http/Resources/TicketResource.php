@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class TicketResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource into an array with pagination links.
      *
      * @return array<string, mixed>
      */

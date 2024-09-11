@@ -31,17 +31,16 @@ class GetOnTheBus implements ShouldQueue
     public function handle(): void
     {
         // spread out the jobs to avoid overwhelming the api
-    //     FetchTickets::dispatch()
-    //     ->delay(now()->addSeconds(4));
+        FetchTickets::dispatch()
+            ->delay(now()->addSeconds(10));
 
-    //    FetchEvents::dispatch()
-    //     ->delay(now()->addSeconds(30));
+        FetchEvents::dispatch()
+            ->delay(now()->addSeconds(20));
 
-  
-    //     FetchAttendees::dispatch()
-    //     ->delay(now()->addSeconds(50));
+        FetchAttendees::dispatch()
+            ->delay(now()->addSeconds(30));
 
         FetchPreferences::dispatch()
-        ->delay(now()->addSeconds(2));
+            ->delay(now()->addSeconds(40));
     }
 }

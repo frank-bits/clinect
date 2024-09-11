@@ -8,7 +8,7 @@
     <title>Events</title>
 
     <!-- Styles -->
-    <style>
+    {{-- <style>
         /* ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com */
         *,
         ::after,
@@ -895,7 +895,7 @@
                 --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity))
             }
         }
-    </style>
+    </style> --}}
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
@@ -915,13 +915,15 @@
                     <td>{{ $ticket->event->name . ':' . $ticket->event->start_date . ' to ' . $ticket->event->end_date }}
                     </td>
                     <td>{{ $ticket->attendee->name }}</td>
-                    <td>{{ $ticket->attendee->preferences[0]['preferences'] }}</td>
+                    <td>{{ $ticket->attendee->preferences['preferences'] }}</td>
                     <td>{{ $ticket->id }}</td>
                     <td>
                         <ul>
                             @if ($ticket->attendee->events)
                                 @foreach ($ticket->attendee->events as $event)
-                                    <li>{{ $event->id . ' | ' . $event->name . ' | ' . $event->start_date }}</li>
+                                    @if($ticket->event->id != $event->id)
+                                      <li>{{ $event->id . ' | ' . $event->name . ' | ' . $event->start_date }}</li>
+                                    @endif
                                 @endforeach
                             @endif
                         </ul>
@@ -930,10 +932,10 @@
             @endforeach
         </thead>
     </table>
-    <div class="mt-4 text-slate-400" >
-    <h3>pagination links</h3>
-    {{$tickets->links()}}
+    <div class="mt-4 text-slate-400">
+        <h3>pagination links</h3>
+        {{ $tickets->links() }}
     </div>
-    </body>
+</body>
 
 </html>

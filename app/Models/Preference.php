@@ -10,15 +10,9 @@ class Preference extends Model
     use HasFactory;
 
     protected $guarded = [];
-
+    // Define the relationship between the Preference and Attendee models
     public function attendee()
     {
         return $this->belongsTo(Attendee::class);
     }
-
-    // public function event()
-    // {
-    //     return $this->belongsTo(Event::class);
-    // }
-
 }

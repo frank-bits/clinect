@@ -8,49 +8,17 @@ use App\Models\Attendee;
 use Illuminate\Http\Request;
 use App\Http\Resources\TicketResource;
 use App\Http\Resources\TicketCollection;
+use Illuminate\Contracts\View\View;
 
 class EventController extends Controller
 {
-    
 
-    public function index()
+
+    public function index():View
     {
- 
-      $tickets=TicketResource::collection(Ticket::paginate(15));
-
+        // Paginate the tickets in a collection
+        $tickets = TicketResource::collection(Ticket::paginate(15));
+        // Return the paginated tickets
         return view('events.index', compact('tickets'));
-    }
-
-    public function show(Event $event)
-    {
-        return view('events.show', compact('event'));
-    }
-
-    public function create()
-    {
-        return view('events.create');
-    }
-
-    public function store(Request $request)
-    {
-        $event = Event::create($request->all());
-        return redirect()->route('events.show', $event);
-    }
-
-    public function edit(Event $event)
-    {
-        return view('events.edit', compact('event'));
-    }
-
-    public function update(Request $request, Event $event)
-    {
-        $event->update($request->all());
-        return redirect()->route('events.show', $event);
-    }
-
-    public function destroy(Event $event)
-    {
-        $event->delete();
-        return redirect()->route('events.index');
     }
 }

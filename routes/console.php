@@ -11,4 +11,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
 
-schedule::job(new GetOnTheBus)->everyMinute();
+/* This job will call each of the endpoints to fetch the data from the API.
+ I set it at 5 min arbitrarily although setting it to be more frequent could lead to getting a 429 */
+schedule::job(new GetOnTheBus)->everyFiveMinutes();
